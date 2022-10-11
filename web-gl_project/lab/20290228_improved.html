@@ -1,0 +1,157 @@
+<html>
+   <head>
+      <style>
+         .aaa{
+            margin-bottom: 10;
+            margin-left: 48.2%; 
+            border-radius: 10px;
+         }
+         
+         .buttons{
+            border-radius: 10px;
+            font-family: 'Lucida Sans';
+         }
+
+         @media screen and (max-width: 1548px) {
+            canvas{
+               width: 450px;
+               height: 450px;
+            }
+            ul{
+               font-size: 15px;
+            }
+            div{
+               font-size: 15px;
+            }
+            button{
+               font-size: 15px;
+            }
+            span{
+               font-size: 15px;
+            }
+         }
+
+         
+         @media screen and (max-width: 1445px) {
+            canvas{
+               width: 350px;
+               height: 350px;
+            }
+            ul{
+               font-size: 13px;
+            }
+            div{
+               font-size: 13px;
+            }
+            button{
+               font-size: 13px;
+            }
+            span{
+               font-size: 13px;
+            }
+         }
+         @media screen and (max-width: 900px) {
+            canvas{
+               width: 300px;
+               height: 300px;
+            }
+            ul{
+               font-size: 10px;
+            }
+            div{
+               font-size: 10px;
+            }
+            button{
+               font-size: 10px;
+            }
+            span{
+               font-size: 10px;
+            }
+         }
+      </style>
+   </head>
+
+<body style="background-color: rgb(240, 240, 240);">
+
+   <canvas id="glcanvas" style="border-radius: 10px; margin-left: 36.6%;" width="512" height="512"></canvas>
+   <div>
+      <button class="buttons" style="display: inline; margin-left: 41.9%; margin-top: 0.03%;" id="ChangeSpinDir">Change Spin Direction</button>
+      <button class="buttons" style="margin-left: 0.05%; display: inline;" id="startLoc">Set to Start Location</button>
+      <button class="buttons" style="margin-bottom: 10; margin-left: 48.2%;" id="StopStart">Start/Stop</button>
+      <button class="buttons" style="margin-left: 45.5%;" id="SpinSlower">Spin Slower</button>
+      <button class="buttons" id="SpinFaster">Spin Faster</button>
+      <span style="font-size: 20px; margin-left: 46.7%; font-family: 'Lucida Sans';">Delay (ms): </span>
+      <span style="font-size: 19px; font-family:'Lucida Sans';" id="delayRate"></span>  <br><br>
+
+      <button class="buttons" style="margin-left: 47.5%;" id="Scale-">Scale-</button>
+      <button class="buttons" style="display: inline;" id="Scale+">Scale+</button>
+      <span style="font-size: 20px; margin-left: 47.74%; font-family: 'Lucida Sans';">Scale: </span>
+      <span style="font-size: 19px; font-family:'Lucida Sans';" id="scaleRate"></span><br><br>
+
+      <span style="color: crimson; margin-left: 40.1%; font-family: 'Lucida Sans';">Red: </span>
+      <span style="color: crimson; font-family:'Lucida Sans'; display: inline;" id="redValue"></span>
+      <span style="color: green; margin-left: 3.85%; font-family: 'Lucida Sans';">Green: </span>
+      <span style="color: green; font-family:'Lucida Sans'; " id="greenValue"></span>
+      <span style="color: rgb(0, 119, 255); margin-left: 3.4%; font-family: 'Lucida Sans';">Blue: </span>
+      <span style="color: rgb(0, 119, 255); font-family:'Lucida Sans';" id="blueValue"></span><br>
+      <button class="buttons" style="border-color: crimson; color: crimson; margin-left: 40.8%;" id="redplus">Red+</button>
+      <button class="buttons" style="border-color: green; color: green; margin-left: 5.2%; display: inline;" id="greenplus">Green+</button>
+      <button class="buttons" style="border-color: rgb(0, 119, 255); color: rgb(0, 119, 255); margin-left: 4.8%; display: inline;" id="blueplus">Blue+</button>
+      <button class="buttons" style="margin-top: 1px; border-color: crimson; color: crimson; margin-left: 40.79%; display: inline;" id="redminus">Red-&nbsp;</button>
+      <button class="buttons" style="border-color: green; color: green; margin-left: 5.21%; display: inline;" id="greenminus">Green-&nbsp;</button>
+      <button class="buttons" style="border-color: rgb(0, 119, 255); color: rgb(0, 119, 255); margin-left: 4.79%; display: inline;" id="blueminus">Blue-&nbsp;</button> 
+   </div>
+   <div style="position: absolute; top: 50px;">
+      <ul style="font-family: 'Lucida Sans';">
+         <li>Start / Stop <span style="padding-left: 115px;">-><span style="padding-left: 15px;"> R</li><br>
+         <li>Set to Start Location <span style="padding-left: 50px; position: fixed;">-><span style="padding-left: 15px;"> T</li><br>
+         <li>Spin Faster / Slower<span style="padding-left: 55px;">-><span style="padding-left: 15px;"> W / S</li><br>
+         <li>Spin Direction Left / Right&nbsp;&nbsp;->&nbsp;&nbsp;&nbsp;A / D</li><br>
+         <li>Move Shapes<span style="margin-left: 21.5%;">->&nbsp;&nbsp; Arrow Keys</li><br>
+         <li>Spin Left / Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; Shift + Left / Right Arrow</li><br>
+         <li>Scale&nbsp; - / +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; Numpad - / Numpad +</li><br>
+         <li>Random Color &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp; C &nbsp;( Shift + C for Canvas Color )</li><br>
+         <li>Epileptic Seizure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; F &nbsp;( Shift + F for Canvas )</li><br>
+         <li>Red &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- / +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; J / U &nbsp;(Shift + Key for Canvas Color)</li><br>
+         <li>Green &nbsp;&nbsp;- / +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; K / I &nbsp;(Shift + Key for Canvas Color)</li><br>
+         <li>Blue &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- / +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->&nbsp;&nbsp; L / O &nbsp;(Shift + Key for Canvas Color)</li><br>
+         <li>Invisible Canvas <span style="margin-left: 76px;">-></span><span style="margin-left: 11px;">G</span></li><br>
+         <li>Background Color R/G/B<span style="margin-left: 14px;">-></span><span style="margin-left: 11px;">Numpad 7/8/9 and 4/5/6</span> </li>
+      </ul>
+   </div>
+   <!--<div style="color: crimson; margin-left: 37.8%; display: inline; font-family: 'Lucida Sans';">
+      <input type="range" id="slidered" min="0" max="1.0" step="0.05" value="0.7" />
+      <input type="range" id="slidegreen" min="0" max="1.0" step="0.05" value="1.0" />
+      <input type="range" id="slideblue" min="0" max="1.0" step="0.1" value="0.7" />
+   </div>-->
+
+
+</body>
+<script id="vertex-shader" type="x-shader/x-vertex">
+   attribute vec4 vPosition;
+   uniform float theta, ezscale, ezx, ezy;
+
+   void main()
+   {
+      gl_Position.x = ((cos(theta) * vPosition.x - sin(theta) * vPosition.y) * ezscale) + ezx;
+      gl_Position.y = ((sin(theta) * vPosition.x + cos(theta) * vPosition.y) * ezscale) + ezy;
+      gl_Position.z = 0.0;
+      gl_Position.w = 1.0;
+   }
+   </script>
+
+   <script id="fragment-shader" type="x-shader/x-fragment">
+
+   precision mediump float;
+   uniform vec4 ezcolors;
+
+   void main()
+   {
+      gl_FragColor = vec4( ezcolors);
+   }
+   </script>
+<script src="20290228_improved.js"></script>
+<script src="../common/MV.js"></script>
+<script src="../common/initShaders.js"></script>
+<script src="../common/webgl-utils.js"></script>
+</html>
